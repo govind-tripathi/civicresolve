@@ -3,6 +3,7 @@ from urllib.parse import urlparse, parse_qs
 import sqlite3
 import csv
 import io
+import os
 import html
 import json
 import re
@@ -25,8 +26,8 @@ CATEGORIES = [
 STATUSES = ["Open", "In Progress", "Resolved", "Rejected"]
 PRIORITIES = ["Low", "Medium", "High", "Critical"]
 
-
 def db():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
